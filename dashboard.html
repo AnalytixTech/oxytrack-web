@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OxyTrack - Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <nav class="navbar">
+        <h1>OxyTrack Dashboard</h1>
+        <div class="nav-buttons">
+          <div class="dropdown">
+            <button class="dropbtn" aria-haspopup="true" aria-expanded="false">
+              Facilities
+            </button>
+            <div class="dropdown-content">
+              <button id="viewFacilitiesBtn">View Facilities</button>
+              <button id="addFacilityBtn">Add Facility</button>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn" aria-haspopup="true" aria-expanded="false">
+              Cylinders
+            </button>
+            <div class="dropdown-content">
+              <button id="addCylinderBtn">Add Cylinder</button>
+              <button id="cylinderInventoryBtn">Cylinder Inventory</button>
+              <button id="viewCylindersBtn">View Cylinders</button>
+            </div>
+          </div>
+          <button id="logoutBtn" class="logout-btn" aria-label="Logout">
+            Logout
+          </button>
+        </div>
+      </nav>
+      <div class="dashboard-content">
+        <h2>Welcome to OxyTrack</h2>
+        <p>You are now logged in.</p>
+      </div>
+
+      <!-- Facility Registration Modal -->
+      <div id="facilityModal" class="modal">
+        <div class="modal-content">
+          <!-- Update the close button -->
+          <span class="close" aria-label="Close modal" title="Close"
+            >&times;</span
+          >
+          <h2>Register New Facility</h2>
+          <form id="facilityForm">
+            <div class="form-group">
+              <label for="facilityName">Facility Name*</label>
+              <input type="text" id="facilityName" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="facilityAddress">Address*</label>
+              <input type="text" id="facilityAddress" name="address" required />
+            </div>
+            <div class="form-group">
+              <label for="facilityEmail">Email*</label>
+              <input type="email" id="facilityEmail" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="facilityPhone">Phone*</label>
+              <input type="tel" id="facilityPhone" name="phone" required />
+            </div>
+            <div class="form-group">
+              <button type="submit">Register Facility</button>
+            </div>
+          </form>
+          <div id="facilityMessage" class="message"></div>
+        </div>
+      </div>
+
+      <!-- Facilities List Modal -->
+      <div id="facilitiesListModal" class="modal">
+        <div class="modal-content">
+          <!-- Update the close button -->
+          <span
+            class="close-facilities"
+            aria-label="Close facilities modal"
+            title="Close"
+            >&times;</span
+          >
+          <div class="facilities-header">
+            <h2>Facilities</h2>
+            <!-- Update the toggle buttons -->
+            <div class="status-toggle">
+              <button
+                id="activeToggle"
+                class="toggle-btn active"
+                aria-label="Show active facilities"
+              >
+                Active
+              </button>
+              <button
+                id="inactiveToggle"
+                class="toggle-btn"
+                aria-label="Show inactive facilities"
+              >
+                Inactive
+              </button>
+            </div>
+          </div>
+          <div class="facilities-list" id="facilitiesList">
+            <!-- Facilities will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Facility Details Modal -->
+      <div id="facilityDetailsModal" class="modal">
+        <div class="modal-content">
+          <!-- Update the close button -->
+          <span
+            class="close-details"
+            aria-label="Close details modal"
+            title="Close"
+            >&times;</span
+          >
+          <h2>Facility Details</h2>
+          <form id="facilityDetailsForm">
+            <input type="hidden" id="detailsFacilityId" />
+            <div class="form-group">
+              <label for="detailsName">Facility Name</label>
+              <input type="text" id="detailsName" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="detailsAddress">Address</label>
+              <input type="text" id="detailsAddress" name="address" required />
+            </div>
+            <div class="form-group">
+              <label for="detailsEmail">Email</label>
+              <input type="email" id="detailsEmail" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="detailsPhone">Phone</label>
+              <input type="tel" id="detailsPhone" name="phone" required />
+            </div>
+            <div class="form-actions">
+              <!-- Update the form buttons -->
+              <button
+                type="submit"
+                id="saveDetailsBtn"
+                disabled
+                aria-label="Save facility changes"
+              >
+                Save Changes
+              </button>
+              <button
+                type="button"
+                id="statusChangeBtn"
+                class="status-btn"
+                aria-label="Change facility status"
+              ></button>
+            </div>
+          </form>
+          <div id="detailsMessage" class="message"></div>
+        </div>
+      </div>
+
+      <!-- Edit Facility Modal -->
+      <div id="editFacilityModal" class="modal">
+        <div class="modal-content">
+          <!-- Update the close button -->
+          <span class="close-edit" aria-label="Close edit modal" title="Close"
+            >&times;</span
+          >
+          <h2>Edit Facility</h2>
+          <form id="editFacilityForm">
+            <input type="hidden" id="editFacilityId" />
+            <div class="form-group">
+              <label for="editName">Facility Name</label>
+              <input type="text" id="editName" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="editAddress">Address</label>
+              <input type="text" id="editAddress" name="address" required />
+            </div>
+            <div class="form-group">
+              <label for="editEmail">Email</label>
+              <input type="email" id="editEmail" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="editPhone">Phone</label>
+              <input type="tel" id="editPhone" name="phone" required />
+            </div>
+            <div class="form-group">
+              <button type="submit">Update Facility</button>
+            </div>
+          </form>
+          <div id="editMessage" class="message"></div>
+        </div>
+      </div>
+
+      <!-- Add Cylinder Modal -->
+      <div id="addCylinderModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add New Cylinder</h2>
+          <form id="addCylinderForm">
+            <div class="form-group">
+              <label for="cylinderId">Cylinder ID</label>
+              <input type="text" id="cylinderId" required />
+            </div>
+            <div class="form-group">
+              <label for="serialNumber">Serial Number</label>
+              <input type="text" id="serialNumber" required />
+            </div>
+            <div class="form-group">
+              <label for="size">Size</label>
+              <select id="size" required>
+                <option value="2CuM">2m³</option>
+                <option value="4CuM">4m³</option>
+                <option value="7CuM">7m³</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="manufactureDate">Manufacture Date</label>
+              <input type="date" id="manufactureDate" required />
+            </div>
+            <div class="form-group">
+              <label for="lastInspectionDate">Last Inspection Date</label>
+              <input type="date" id="lastInspectionDate" required />
+            </div>
+            <button type="submit">Add Cylinder</button>
+          </form>
+          <div id="addCylinderMessage" class="message"></div>
+        </div>
+      </div>
+
+      <!-- Cylinder Inventory Modal -->
+      <div id="cylinderInventoryModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Update Cylinder Inventory</h2>
+          <form id="cylinderInventoryForm">
+            <div class="form-group">
+              <label for="facility">Facility</label>
+              <select id="facility" required></select>
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <div class="radio-group">
+                <label>
+                  <input type="radio" name="status" value="Filled" required />
+                  Filled
+                </label>
+                <label>
+                  <input type="radio" name="status" value="In Use" required />
+                  In Use
+                </label>
+                <label>
+                  <input type="radio" name="status" value="Empty" required />
+                  Empty
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inventoryCylinderId">Cylinder ID</label>
+              <input type="text" id="inventoryCylinderId" required />
+            </div>
+            <div class="form-group">
+              <label for="purity">Purity (%)</label>
+              <input type="number" id="purity" min="0" max="99" disabled />
+            </div>
+            <div class="form-group">
+              <label for="pressure">Pressure (psi)</label>
+              <input type="number" id="pressure" min="0" max="2000" disabled />
+            </div>
+            <button type="submit">Update Inventory</button>
+          </form>
+          <div id="inventoryMessage" class="message"></div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="js/dashboard.js"></script>
+  </body>
+</html>
