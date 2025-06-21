@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import React, { useState } from 'react';
 
 const Signup = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -15,6 +16,21 @@ const Signup = () => {
           Create Account
         </h2>
         <form className="space-y-4">
+          <div>
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
           <div>
             <label
               htmlFor="email"
@@ -67,7 +83,12 @@ const Signup = () => {
             Sign Up
           </button>
         </form>
-        <p className='text-center mt-4'>Already have an account? <Link href="/login" className="text-blue-600">Log in</Link></p>
+        <p className="text-center mt-4">
+          Already have an account?{" "}
+          <Link href="/signin" className="text-blue-600">
+            Log in
+          </Link>
+        </p>
       </div>
     </div>
   );
