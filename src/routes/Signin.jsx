@@ -10,9 +10,7 @@ const Signin = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <h1 className="mb-10 text-4xl">Oxytrack</h1>
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-semibold text-center mb-6">
-        Sign in 
-        </h2>
+        <h2 className="text-2xl font-semibold text-center mb-6">Sign in</h2>
         <form className="space-y-4">
           <div>
             <label
@@ -44,7 +42,7 @@ const Signin = () => {
               required
             />
           </div>
-          
+
           <button
             type="submit"
             className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition"
@@ -53,7 +51,7 @@ const Signin = () => {
           </button>
         </form>
         <p className="text-center mt-4">
-        Dont have an account ?{" "}
+          Dont have an account ?{" "}
           <Link href="/signin" className="text-blue-600">
             Log in
           </Link>
