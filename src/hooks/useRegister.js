@@ -4,7 +4,7 @@ import { useNavigate } from "@tanstack/react-router";
 
 const registerUser = async (userData) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_API_URL}/api/auth/register`,
+    `${import.meta.env.VITE_API_URL}/api/auth/register`,
     userData,
     {
       headers: {
@@ -22,7 +22,7 @@ const useRegister = () => {
     mutationFn: registerUser,
     onSuccess: (data) => {
       console.log("Registration successful:", data);
-      navigate({ to: "/sigin" });
+      navigate({ to: "/signin" }); // Fixed typo: "/sigin" → "/signin"
     },
     onError: (error) => {
       console.error("Registration error:", error);

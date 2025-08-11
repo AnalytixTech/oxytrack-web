@@ -5,6 +5,7 @@ import useRegister from "../hooks/useRegister";
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -22,7 +23,6 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     setError("");
 
     if (formData.password !== formData.confirmPassword) {
@@ -37,6 +37,7 @@ const Signup = () => {
     register(
       {
         name: formData.name,
+        username: formData.username,
         email: formData.email,
         password: formData.password,
       },
@@ -75,6 +76,23 @@ const Signup = () => {
               name="name"
               className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
               value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+              value={formData.username}
               onChange={handleChange}
               required
             />
