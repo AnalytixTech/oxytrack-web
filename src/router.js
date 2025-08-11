@@ -7,6 +7,7 @@ import {
 import NotFound from "./routes/NotFound";
 import Signup from "./routes/Signup";
 import Signin from "./routes/Signin";
+import Dashboard from "./routes/Dashboard";
 
 // All routes
 
@@ -22,7 +23,11 @@ const signinRoute = createRoute({
   path: "/signin",
   component: Signin,
 });
-
+const dashboardRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/dashboard",
+  component: Dashboard,
+});
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "*",
@@ -32,6 +37,7 @@ const notFoundRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   indexRoute,
   signinRoute,
+  dashboardRoute,
   notFoundRoute,
 ]);
 
