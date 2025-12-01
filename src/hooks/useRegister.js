@@ -22,7 +22,7 @@ const useRegister = () => {
     mutationFn: registerUser,
     onSuccess: (data) => {
       console.log("Registration successful:", data);
-      navigate({ to: "/signin" }); // Fixed typo: "/sigin" → "/signin"
+      navigate({ to: "/home" });
     },
     onError: (error) => {
       console.error("Registration error:", error);

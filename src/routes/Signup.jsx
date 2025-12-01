@@ -1,8 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import React, { useState } from "react";
 import useRegister from "../hooks/useRegister";
+import { FaEyeSlash, FaEye } from "react-icons/fa6";
 
 const Signup = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -19,6 +23,14 @@ const Signup = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handlePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
+  const handleConfirmPassword = () => {
+    setShowConfirmPassword((prev) => !prev);
   };
 
   const handleSubmit = (e) => {
@@ -74,7 +86,7 @@ const Signup = () => {
               type="text"
               id="name"
               name="name"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full border-2 border-gray-300  rounded-md p-2  focus-within:border-[#0097b2] outline-none"
               value={formData.name}
               onChange={handleChange}
               required
@@ -91,7 +103,7 @@ const Signup = () => {
               type="text"
               id="username"
               name="username"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full border-2 border-gray-300  rounded-md p-2  focus-within:border-[#0097b2] outline-none"
               value={formData.username}
               onChange={handleChange}
               required
@@ -108,7 +120,7 @@ const Signup = () => {
               type="email"
               id="email"
               name="email"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
+              className="mt-1 block w-full border-2 border-gray-300  rounded-md p-2  focus-within:border-[#0097b2] outline-none"
               value={formData.email}
               onChange={handleChange}
               required
@@ -121,16 +133,21 @@ const Signup = () => {
             >
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              minLength="6"
-            />
+            <div className=" flex justify-between items-center mt-1 border-2 border-gray-300 rounded-md p-2 focus-within:border-[#0097b2]">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                className=" w-full focus:outline-none"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                minLength="6"
+              />
+              <button type="button" onClick={handlePassword}>
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </button>
+            </div>
           </div>
           <div>
             <label
@@ -139,28 +156,33 @@ const Signup = () => {
             >
               Confirm Password
             </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              minLength="6"
-            />
+            <div className=" flex justify-between items-center mt-1 border-2 border-gray-300 rounded-md p-2 focus-within:border-[#0097b2]">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                id="confirmPassword"
+                name="confirmPassword"
+                className="mt-1 block w-full outline-none"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+                minLength="6"
+              />
+              <button type="button" onClick={handleConfirmPassword}>
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </button>
+            </div>
           </div>
           <button
             type="submit"
             disabled={isPending}
-            className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition disabled:bg-blue-400 disabled:cursor-not-allowed"
+            className="w-full bg-[#0097b2] text-white p-3 rounded-md hover:bg-[#0097b2] transition disabled:bg-[#0097b2] disabled:cursor-not-allowed"
           >
             {isPending ? "Registering..." : "Sign Up"}
           </button>
         </form>
         <p className="text-center mt-4">
           Already have an account?{" "}
-          <Link href="/signin" className="text-blue-600">
+          <Link href="/" className="text-[#0097b2]">
             Log in
           </Link>
         </p>

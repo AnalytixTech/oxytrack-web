@@ -1,9 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import React, { useState } from "react";
 import useLogin from "../hooks/useLogin";
+import { FaEyeSlash, FaEye } from "react-icons/fa6";
+
 const Signin = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [error, setError] = useState("");
@@ -17,11 +20,15 @@ const Signin = () => {
     }));
   };
 
+  const handlePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
 
-    if (!formData.username || !formData.password) {
+    if (!formData.email || !formData.password) {
       setError("Username and password are required.");
       return;
     }
@@ -45,17 +52,17 @@ const Signin = () => {
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label
-              htmlFor="username"
+              htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Username
+              Email
             </label>
             <input
-              type="text"
-              id="username"
-              name="username"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-              value={formData.username}
+              type="email"
+              id="email"
+              name="email"
+              className="mt-1 block w-full border-2 border-gray-300  rounded-md p-2  focus-within:border-[#0097b2] outline-none"
+              value={formData.email}
               onChange={handleChange}
               required
             />
@@ -67,28 +74,33 @@ const Signin = () => {
             >
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
+            <div className=" flex justify-between items-center mt-1 border-2 border-gray-300 rounded-md p-2 focus-within:border-[#0097b2]">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                className=" w-full focus:outline-none"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <button type="button" onClick={handlePassword}>
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
+              </button>
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={isPending}
-            className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition disabled:bg-blue-400 disabled:cursor-not-allowed"
+            className="w-full bg-[#0097b2] text-white p-3 rounded-md hover:[#0097b2] transition disabled:bg-[#0097b2] disabled:cursor-not-allowed"
           >
             {isPending ? "Signing in..." : "Sign in"}
           </button>
         </form>
         <p className="text-center mt-4">
           Dont have an account ?{" "}
-          <Link href="/signup" className="text-blue-600">
+          <Link to="/signup" className="text-[#0097b2] hover:underline">
             Sign up
           </Link>
         </p>
