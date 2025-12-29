@@ -2,7 +2,7 @@ import React from "react";
 
 const ScanTab = ({ tabs, title }) => {
   return (
-    <div className="">
+    <div className="max-w-xl mx-auto flex flex-col justify-center items-center p-4">
       <div className='flex items-center space-x-2"'>
         <div className="w-8 h-8 bg-[#0097b2] rounded-full flex justify-center items-center">
           <span className="text-white text-sm">{tabs}</span>
