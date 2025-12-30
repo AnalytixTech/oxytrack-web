@@ -12,7 +12,7 @@ const Signup = () => {
     username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    showConfirmPassword: "",
   });
   const [error, setError] = useState("");
   const { mutate: register, isPending } = useRegister();
@@ -52,6 +52,7 @@ const Signup = () => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
+        showConfirmPassword: formData.showConfirmPassword,
       },
       {
         onError: (error) => {
@@ -159,10 +160,10 @@ const Signup = () => {
             <div className=" flex justify-between items-center mt-1 border-2 border-gray-300 rounded-md p-2 focus-within:border-[#0097b2]">
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                id="confirmPassword"
-                name="confirmPassword"
+                id="showConfirmPassword"
+                name="showConfirmPassword"
                 className="mt-1 block w-full outline-none"
-                value={formData.confirmPassword}
+                value={formData.showConfirmPassword}
                 onChange={handleChange}
                 required
                 minLength="6"
