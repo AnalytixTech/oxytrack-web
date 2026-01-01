@@ -43,9 +43,9 @@ const Sidebar = () => {
     },
     {
       id: 6,
-      label: "Inspections",
+      label: "Inspection",
       icon: <FaFileAlt className="text-lg" />,
-      path: "/inspections",
+      path: "/inspection",
     },
   ];
 

@@ -13,6 +13,7 @@ import Cylinders from "./routes/Cylinders";
 import Facilities from "./routes/Facilities";
 import Scan from "./routes/Scan";
 import Inventory from "./routes/Inventory";
+import Inspection from "./routes/Inspection";
 
 // Protected Home component
 const ProtectedHome = () => (
@@ -60,6 +61,11 @@ const scanRoute = createRoute({
   path: "/scan",
   component: Scan,
 });
+const inspectionRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/inspection",
+  component: Inspection,
+});
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "*",
@@ -74,6 +80,7 @@ const routeTree = rootRoute.addChildren([
   facilitiesRoute,
   inventoryRoute,
   scanRoute,
+  inspectionRoute,
   notFoundRoute,
 ]);
 
