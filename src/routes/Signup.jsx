@@ -5,14 +5,14 @@ import { FaEyeSlash, FaEye } from "react-icons/fa6";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
     username: "",
     email: "",
     password: "",
-    showConfirmPassword: "",
+    confirmPassword: "",
   });
   const [error, setError] = useState("");
   const { mutate: register, isPending } = useRegister();
@@ -30,7 +30,7 @@ const Signup = () => {
   };
 
   const handleConfirmPassword = () => {
-    setShowConfirmPassword((prev) => !prev);
+    setConfirmPassword((prev) => !prev);
   };
 
   const handleSubmit = (e) => {
@@ -52,7 +52,7 @@ const Signup = () => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
-        showConfirmPassword: formData.showConfirmPassword,
+        confirmPassword: formData.confirmPassword,
       },
       {
         onError: (error) => {
@@ -159,17 +159,17 @@ const Signup = () => {
             </label>
             <div className=" flex justify-between items-center mt-1 border-2 border-gray-300 rounded-md p-2 focus-within:border-[#0097b2]">
               <input
-                type={showConfirmPassword ? "text" : "password"}
-                id="showConfirmPassword"
-                name="showConfirmPassword"
+                type={confirmPassword ? "text" : "password"}
+                id="confirmPassword"
+                name="confirmPassword"
                 className="mt-1 block w-full outline-none"
-                value={formData.showConfirmPassword}
+                value={formData.confirmPassword}
                 onChange={handleChange}
                 required
                 minLength="6"
               />
               <button type="button" onClick={handleConfirmPassword}>
-                {showPassword ? <FaEye /> : <FaEyeSlash />}
+                {confirmPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
           </div>

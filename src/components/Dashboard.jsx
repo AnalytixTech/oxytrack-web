@@ -8,13 +8,14 @@ const DashboardSection = ({ title, number, icon, border, color }) => {
   return (
     <section
       className={` w-full px-6 py-4 rounded-lg shadow-md bg-white flex justify-between items-center space-x-4 border-l-4 ${border}`}
+     
     >
       <div>
         <h2 className="text-gray-400 text-sm">{title}</h2>
 
         <p className="text-4xl font-semibold">{number}</p>
       </div>
-      <p className={`text-2xl font-bold ${color} rounded-full p-4`}>{icon}</p>
+      <p className={`text-2xl font-bold ${color} rounded-full p-4`}  aria-hidden="true" >{icon}</p>
     </section>
   );
 };
@@ -46,7 +47,7 @@ const Dashboard = () => {
           <DashboardSection
             title="Active Facilities"
             number={0}
-            icon={null}
+            icon={<RiBuildingLine/>}
             border="border-l-green-500"
             color="text-green-500"
           />
@@ -56,13 +57,13 @@ const Dashboard = () => {
           <div className="flex justify-between items-center w-full my-4 space-x-4">
             <button
               type="button"
-              className="bg-[#0097b2] text-white px-4 py-3 rounded-md w-[300px] flex justify-center items-center"
+              className="bg-[#0097b2] text-white px-4 py-3 rounded-md w-full md:w-[300px] flex justify-center items-center"
             >
               <span>Add Cylinder</span>
             </button>
             <button
               type="button"
-              className="bg-yellow-500 text-white px-4 py-3 rounded-md w-[300px]"
+              className="bg-yellow-500 text-white px-4 py-3 rounded-md w-full md:w-[300px]"
             >
               <span>Scan Cylinders</span>
             </button>
