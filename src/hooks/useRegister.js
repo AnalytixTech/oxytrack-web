@@ -22,7 +22,12 @@ const useRegister = () => {
     mutationFn: registerUser,
     onSuccess: (data) => {
       console.log("Registration successful:", data);
-      navigate({ to: "/verify-email" });
+      navigate({ to: "/verify-email",
+        state: { 
+          email: data.user?.email || data.email,
+          message: "Please verify your email to complete registration."
+        }
+       });
     },
     onError: (error) => {
       console.error("Registration error:", error);
