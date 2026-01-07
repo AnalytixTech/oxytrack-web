@@ -14,6 +14,7 @@ import Facilities from "./routes/Facilities";
 import Scan from "./routes/Scan";
 import Inventory from "./routes/Inventory";
 import Inspection from "./routes/Inspection";
+import VerifyEmail from "./routes/VerifyEmail";
 
 // Protected Home component
 const ProtectedHome = () => (
@@ -72,9 +73,16 @@ const notFoundRoute = createRoute({
   component: NotFound,
 });
 
+const verifyEmailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path:"/verify-email",
+  component:VerifyEmail,
+})
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   signupRoute,
+  verifyEmailRoute,
   homeRoute,
   cylindersRoute,
   facilitiesRoute,
